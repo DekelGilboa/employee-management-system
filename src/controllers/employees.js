@@ -5,8 +5,10 @@ const { symbolToMongoMap: map, regEx } = require("../utils/symbolToMongo");
 
 // Get all employees and add option to filter by name, position, salary, and custom filters (e.g., salary>=50000)
 const getEmployees = async (req, res, next) => {
-  const { name, position, salary, filters } = req.query;
+  const { name, position, salary, filters, sort } = req.query;
   const query = {};
+
+  // filters options
   if (name) {
     query.name = { $regex: name, $options: "i" };
   }
@@ -25,9 +27,13 @@ const getEmployees = async (req, res, next) => {
       }
     });
   }
+
   try {
-    const employees = await Employee.find(query);
-    res.json({ count: employees.length, data: employees });
+    // sort options (default is by ID)
+    const sortOptions = sort?.split(",").join(" ");
+    const employees = Employee.find(query);
+    const result = await employees.sort((sortOptions ?? "_id"));
+    res.json({ count: result.length, data: result });
   } catch (error) {
     next(error);
   }
@@ -38,7 +44,7 @@ const addEmployee = async (req, res, next) => {
   try {
     const employee = new Employee(req.body);
     await employee.save();
-    res.json({ msg: "Employee added", employee });
+    res.status(201).json({ msg: "Employee added", employee });
   } catch (error) {
     next(error);
   }
@@ -52,7 +58,7 @@ const getEmployeeByID = async (req, res, next) => {
     if (!employee) {
       return res.status(404).json({ msg: `Employee with ID ${id} not found` });
     }
-    res.json(employee);
+    res.status(200).json(employee);
   } catch (error) {
     next(error);
   }
@@ -69,7 +75,7 @@ const updateEmployee = async (req, res, next) => {
     if (!employee) {
       return res.status(404).json({ msg: `Employee with ID ${id} not found` });
     }
-    res.json({ msg: "Employee updated", employee });
+    res.status(200).json({ msg: "Employee updated", employee });
   } catch (error) {
     next(error);
   }
@@ -83,7 +89,7 @@ const deleteEmployee = async (req, res, next) => {
     if (!employee) {
       return res.status(404).json({ msg: `Employee with ID ${id} not found` });
     }
-    res.json({ msg: "Employee Deleted", employee });
+    res.status(200).json({ msg: "Employee Deleted", employee });
   } catch (error) {
     next(error);
   }
