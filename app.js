@@ -1,12 +1,10 @@
-// Import required modules
 const express = require("express");
 const Employee = require("./src/models/Employee");
+const connect = require("./src/db/connect");
 
-// Create an instance of Express app
 const app = express();
-const port = 3000; // You can change the port as needed
+const port = 3000;
 
-// Define a basic route
 app.get("/", (req, res) => {
   // Create an instance of Employee
   const employee = new Employee(1, "John Doe", "Software Developer", 50000);
@@ -18,7 +16,8 @@ app.get("/", (req, res) => {
     Salary: ${employee.getSalary()}`);
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+connect().then(() => {
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
 });
