@@ -32,7 +32,7 @@ const getEmployees = async (req, res, next) => {
     // sort options (default is by ID)
     const sortOptions = sort?.split(",").join(" ");
     const employees = Employee.find(query);
-    const result = await employees.sort((sortOptions ?? "_id"));
+    const result = await employees.sort(sortOptions ?? "_id");
     res.json({ count: result.length, data: result });
   } catch (error) {
     next(error);

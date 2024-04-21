@@ -3,7 +3,6 @@ const express = require("express");
 require("dotenv").config();
 
 const database = require("./src/db/Database");
-// const connectToDB = require("./src/db/connect");
 const notFound = require("./src/middlewares/notFound");
 const errorHandler = require("./src/middlewares/errorHandler");
 const employeesRouter = require("./src/routes/employees");
