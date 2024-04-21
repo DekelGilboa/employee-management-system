@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
-
-const uri =
-  "mongodb+srv://dekeltest3:MpRzAQoecvFViWuV@nodeexpressprojects.crwvwod.mongodb.net/?retryWrites=true&w=majority&appName=NodeExpressProjects";
+require("dotenv").config();
 
 const connect = async () => {
+  const uri = process.env.MONGO_URI;
   try {
     await mongoose.connect(uri);
     console.log("Connected to MongoDB");

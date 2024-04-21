@@ -1,9 +1,10 @@
 const express = require("express");
-const Employee = require("./src/models/Employee");
+require("dotenv").config();
+
 const connect = require("./src/db/connect");
+const Employee = require("./src/models/Employee");
 
 const app = express();
-const port = 3000;
 
 app.get("/", (req, res) => {
   // Create an instance of Employee
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 });
 
 connect().then(() => {
+  const port = process.env.PORT || 3000;
   app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
   });
