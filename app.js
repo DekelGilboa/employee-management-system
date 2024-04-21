@@ -2,7 +2,7 @@
 const express = require("express");
 require("dotenv").config();
 
-const connect = require("./src/db/connect");
+const connectToDB = require("./src/db/connect");
 const notFound = require("./src/middlewares/notFound");
 const errorHandler = require("./src/middlewares/errorHandler");
 const employeesRouter = require("./src/routes/employees");
@@ -25,11 +25,11 @@ app.use(notFound);
 app.use(errorHandler);
 
 // connection to DB and start server
-connect()
+connectToDB()
   .then(() => {
     const port = process.env.PORT || 3000;
     app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);
     });
   })
-  .catch((error) => console.error("Error connecting to MongoDB: ", error));
+  .catch((err) => console.error("Error connecting to MongoDB: ", err));

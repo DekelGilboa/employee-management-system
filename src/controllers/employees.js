@@ -1,6 +1,6 @@
 // Desc: Controller for employees
 
-const Employee = require("../models/EmployeeModel");
+const Employee = require("../models/Employee");
 const { symbolToMongoMap: map, regEx } = require("../utils/symbolToMongo");
 
 // Get all employees and add option to filter by name, position, salary, and custom filters (e.g., salary>=50000)
