@@ -10,21 +10,11 @@ const {
   deleteEmployee,
 } = require("../controllers/employees");
 
+router.route("/").get(getEmployees).post(addEmployee);
 router
-  .get("/", async (req, res, next) => {
-    getEmployees(req, res, next);
-  })
-  .post("/", async (req, res, next) => {
-    addEmployee(req, res, next);
-  })
-  .get("/:id", async (req, res, next) => {
-    getEmployeeByID(req, res, next);
-  })
-  .put("/:id", async (req, res, next) => {
-    updateEmployee(req, res, next);
-  })
-  .delete("/:id", async (req, res, next) => {
-    deleteEmployee(req, res, next);
-  });
+  .route("/:id")
+  .get(getEmployeeByID)
+  .put(updateEmployee)
+  .delete(deleteEmployee);
 
 module.exports = router;
