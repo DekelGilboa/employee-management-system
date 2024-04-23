@@ -33,7 +33,7 @@ const getEmployees = async (req, res, next) => {
     const sortOptions = sort?.split(",").join(" ");
     const employees = Employee.find(query);
     const result = await employees.sort(sortOptions ?? "_id");
-    res.json({ count: result.length, data: result });
+    res.json({ msg: "Employees were found", count: result.length, data: result });
   } catch (error) {
     next(error);
   }
@@ -44,7 +44,7 @@ const addEmployee = async (req, res, next) => {
   try {
     const employee = new Employee(req.body);
     await employee.save();
-    res.status(201).json({ msg: "Employee added", employee });
+    res.status(201).json({ msg: "Employee is added", count: 1, data: [employee] });
   } catch (error) {
     next(error);
   }
@@ -58,7 +58,7 @@ const getEmployeeByID = async (req, res, next) => {
     if (!employee) {
       return res.status(404).json({ msg: `Employee with ID ${id} not found` });
     }
-    res.status(200).json(employee);
+    res.status(200).json({ msg: "Employee is found", count: 1, data: [employee] });
   } catch (error) {
     next(error);
   }
@@ -75,7 +75,7 @@ const updateEmployee = async (req, res, next) => {
     if (!employee) {
       return res.status(404).json({ msg: `Employee with ID ${id} not found` });
     }
-    res.status(200).json({ msg: "Employee updated", employee });
+    res.status(200).json({ msg: "Employee is updated", count: 1, data: [employee] });
   } catch (error) {
     next(error);
   }
@@ -89,7 +89,7 @@ const deleteEmployee = async (req, res, next) => {
     if (!employee) {
       return res.status(404).json({ msg: `Employee with ID ${id} not found` });
     }
-    res.status(200).json({ msg: "Employee Deleted", employee });
+    res.status(200).json({ msg: "Employee Deleted", count: 1, data: [employee] });
   } catch (error) {
     next(error);
   }

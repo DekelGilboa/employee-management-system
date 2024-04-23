@@ -1,6 +1,7 @@
 // imports
 const express = require("express");
 require("dotenv").config();
+const cors = require("cors");
 
 const database = require("./src/db/Database");
 const notFound = require("./src/middlewares/notFound");
@@ -8,6 +9,9 @@ const errorHandler = require("./src/middlewares/errorHandler");
 const employeesRouter = require("./src/routes/employees");
 
 const app = express();
+
+// enable CORS
+app.use(cors());
 
 // built in middlewares
 app.use(express.static("./public"));
