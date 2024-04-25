@@ -5,7 +5,7 @@
 ## Deploymet
 
 The Server for the Employees Management System is deployed on AWS EC2 for production access. You can access the deployed application using the following link:
-[Employees Management System - Server](http://ems.ts.s3-website.us-east-2.amazonaws.com/](http://ec2-3-141-153-254.us-east-2.compute.amazonaws.com:3000/api/v1/employees/)
+[Employees Management System - Server](http://ec2-3-141-153-254.us-east-2.compute.amazonaws.com:3000/api/v1/employees/)
 
 This project is a server-side application that serves a web API to interact with a MongoDB database. It allows clients to send requests to the server for CRUD operations on employees, which are then performed on the database. The server offers the following options:
 ### 👇 Full documentation at the end of the file 👇
