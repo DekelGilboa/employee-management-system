@@ -13,10 +13,6 @@ const employeeSchema = new mongoose.Schema({
   position: {
     type: String,
     required: [true, "Position must be provided"],
-    // enum: {
-    //   values: ["Manager", "Developer", "Designer", "HR"],
-    //   message: "Invalid position",
-    // },
     minlength: [2, "Position must be at least 2 characters long"],
   },
 
