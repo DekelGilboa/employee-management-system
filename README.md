@@ -99,13 +99,13 @@ The base URL for accessing the Employees Management System API is `http://ec2-3-
 - **Query Parameters:**
   - `sort` (optional): Sorts the results based on specified fields. Use `-` prefix for descending order.
   - `filters` (optional): Filters the results based on specified conditions. Numeric filters on `salary` can be applied using the following operators:
-    - `=`: Equal to (e.g., `salary=50000`)
+
     - `!=`: Not equal to (e.g., `salary!=20000`)
     - `<`: Less than (e.g., `salary=<10000`)
     - `<=`: Less than or equal to (e.g., `salary<=50000`)
     - `>`: Greater than (e.g., `salary>1000`)
     - `>=`: Greater than or equal to (e.g., `salary>=30000`)
-    - 
+    
 - **Example Request:**
   ```http
   GET /endpoint/?sort=-salary&filters=salary>20000&position=Manager
