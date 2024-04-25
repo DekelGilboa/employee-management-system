@@ -2,6 +2,7 @@
 
 const NotFoundError = require("../errors/NotFoundError");
 const Employee = require("../models/Employee");
+const ResponseObject = require("../models/ResponseObject");
 const { symbolToMongoMap: map, regEx } = require("../utils/symbolToMongo");
 
 // Get all employees and add option to filter by name, position, salary, and custom filters (e.g., salary>=50000)
@@ -51,7 +52,7 @@ const addEmployee = async (req, res, next) => {
     await employee.save();
     res
       .status(201)
-      .json({ msg: "Employee is added", count: 1, data: [employee] });
+      .json(new ResponseObject("Employee has been added", 1, [employee]));
   } catch (error) {
     next(error);
   }
@@ -67,7 +68,7 @@ const getEmployeeByID = async (req, res, next) => {
     }
     res
       .status(200)
-      .json({ msg: "Employee is found", count: 1, data: [employee] });
+      .json(new ResponseObject("Employee has been found", 1, [employee]));
   } catch (error) {
     next(error);
   }
@@ -86,7 +87,7 @@ const updateEmployee = async (req, res, next) => {
     }
     res
       .status(200)
-      .json({ msg: "Employee is updated", count: 1, data: [employee] });
+      .json(new ResponseObject("Employee has been updated", 1, [employee]));
   } catch (error) {
     console.log(error);
     next(error);
@@ -103,7 +104,7 @@ const deleteEmployee = async (req, res, next) => {
     }
     res
       .status(200)
-      .json({ msg: "Employee Deleted", count: 1, data: [employee] });
+      .json(new ResponseObject("Employee has been deleted", 1, [employee]));
   } catch (error) {
     next(error);
   }
