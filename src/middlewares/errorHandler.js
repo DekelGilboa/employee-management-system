@@ -1,4 +1,9 @@
+const NotFoundError = require("../errors/NotFoundError");
+
 const errorHandler = (err, req, res, next) => {
+  if (err instanceof NotFoundError) {
+    return res.status(404).json({ msg: err.message });
+  }
   if (err.name === "CastError") {
     return res.status(400).json({ msg: "Invalid or missing ID" });
   }

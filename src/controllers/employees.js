@@ -1,5 +1,6 @@
 // Desc: Controller for employees
 
+const NotFoundError = require("../errors/NotFoundError");
 const Employee = require("../models/Employee");
 const { symbolToMongoMap: map, regEx } = require("../utils/symbolToMongo");
 
@@ -62,7 +63,7 @@ const getEmployeeByID = async (req, res, next) => {
     const { id } = req.params;
     const employee = await Employee.findById(id);
     if (!employee) {
-      return res.status(404).json({ msg: `Employee with ID ${id} not found` });
+      return next(new NotFoundError(id))
     }
     res
       .status(200)
@@ -81,7 +82,7 @@ const updateEmployee = async (req, res, next) => {
       runValidators: true,
     });
     if (!employee) {
-      return res.status(404).json({ msg: `Employee with ID ${id} not found` });
+      return next(new NotFoundError(id))
     }
     res
       .status(200)
@@ -98,7 +99,7 @@ const deleteEmployee = async (req, res, next) => {
     const { id } = req.params;
     const employee = await Employee.findByIdAndDelete(id);
     if (!employee) {
-      return res.status(404).json({ msg: `Employee with ID ${id} not found` });
+      return next(new NotFoundError(id))
     }
     res
       .status(200)
