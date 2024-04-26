@@ -18,7 +18,7 @@ app.use(express.static("./public"));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.status(200).status(200).json({ msg: "Hello World!" });
+  res.status(200).status(200).json({ msg: "Home Page!, please visit our API on path: /api/v1/employees" });
 });
 
 // routes
